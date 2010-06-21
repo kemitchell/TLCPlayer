@@ -55,9 +55,9 @@ addChild(languageToggle);
 
 languageToggle.addEventListener(MouseEvent.CLICK, function(e:Event) {
 	var position = captioningNames.indexOf(activeCaptioning);
-	var captioningToShow = null;
-	if (position < captioningNames.length) {
-		showCaptions(captioningNames[position + 1]);
+	var next = captioningNames[position + 1];
+	if (next) {
+		showCaptions(next);
 	} else {
 		showCaptions(captioningNames[0]);
 	}

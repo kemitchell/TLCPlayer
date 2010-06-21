@@ -1,5 +1,7 @@
 var params = LoaderInfo(this.root.loaderInfo).parameters;
 
+var NO_CAPTIONS = 'None';
+
 player.skin = (params['skin']) ? params['skin'] : null ; 
 
 if(params['autoplay']) {
@@ -37,7 +39,8 @@ for (var key:String in params) {
 	}
 }
 
-captioningNames.push('None');
+captioningNames.push(NO_CAPTIONS);
+captioningNames.sort();
 
 eachCaptioning(function(n, c) {
 	c.addEventListener(CaptionChangeEvent.CAPTION_CHANGE, onCaptionChange);

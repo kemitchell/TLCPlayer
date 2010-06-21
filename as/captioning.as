@@ -6,7 +6,7 @@ var captioningTokenizers:Object = new Object();
 
 function showCaptions(name) {
 	
-	if(name == 'None')
+	if(name == NO_CAPTIONS)
 		name = null;
 	
 	if(name && captions[name]) {
@@ -15,8 +15,8 @@ function showCaptions(name) {
 	} else {
 		captionBox.htmlText = '';
 		captionBox.visible = false;
-		activeCaptioning = null;
-		languageToggle.text = 'None';
+		activeCaptioning = NO_CAPTIONS;
+		languageToggle.text = NO_CAPTIONS;
 		name = null;
 	}
 		
@@ -53,18 +53,17 @@ function onCaptionChange(event:CaptionChangeEvent) {
 	if (captioningTokenizers[activeCaptioning]) {
 		text = text.replace(TAG_REGEXP, '');
 		var tokenizer = captioningTokenizers[activeCaptioning];
-		var words = tokenizer.splitWords(text);
+		var words = tokenizer.tokenize(text);
 		var html = '<p>';
 		for (var i=0; i < words.length; i++) {
 			var word = words[i];
-			if(tokenizer.shouldLink(word)) {
-				html += '<a href="' + tokenizer.linkFor(word) + '" target="_blank">' + word + '</a>';
+			if(word.url) {
+				html += '<a href="' + word.url + '" target="_blank">' + word.text + '</a>';
 			} else {
-				html += word;
+				html += word.text;
 			}
 		}
 		html += '</p>';
-		// captionBox.htmlText = html;
 		event.captionCuePointObject.parameters.text = html;
 	}
 		

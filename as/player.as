@@ -18,7 +18,7 @@ include 'setup.as'; // components
 include 'captioning.as'; // captioning subsystem
 
 include 'tokenizing.as'; // tokenizer registry
-include 'russian.as'; // Russian tokenizer
+include 'rockinrussian.as'; // Russian tokenizer
 
 include 'params.as' // flashvar parsing
 
