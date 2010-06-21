@@ -85,32 +85,16 @@ Into the following chain of words and extra text:
 
 The words “How”, “are”, and “you” might then be linked to, e.g., [dictionary.com](http://www.dictionary.com).
 
-At present only a crude word tokenizer for the Russian language is built into TLC Player. This tokenizer links Russian words to the online reference component of the “Rockin’ Russian” project. Developers familiar with ActionScript should start with that example when building their own tokenizers. The general means of baking a tokenizers into TLC Player looks as follows:
+At present only a simple word tokenizer for the Russian language is built into TLC Player. This tokenizer links Russian words to the online reference component of the “Rockin’ Russian” project. Developers familiar with ActionScript should start with that example when building their own tokenizers. The general means of baking a tokenizers into TLC Player looks as follows:
 
     registerTokenizer({
-        name: 'Russian',
-        // Given a word, return the URL to which its link ought to point
-        linkFor: function (word) {
-            return 'http://example.dictionary.com/lookup.php?word=' + encodeURIComponent(word);
-        },
-        // Given a word:
-        // * If it ought to be linked, return true
-        // * If it ought not be linked, return false
-        shouldLink: function (word) {
-            // e.g. 'going' -> true
-            // e.g. ', ' -> false
-            return this.isCharacter(word.charAt(0));
-        },
-        splitWords: function (str) {
-            // exmaple input: "Nice going, Charlie!"
-            var words = [];
-            for (var i = 0; i < str.length; i++) {
-                var character = str.charAt(i);
-                // Iterate the caption string
-                // Add words and text chunks to words
-            }
-            return words;
-            // example output: ['Nice', ' ', 'going', ', ', 'Charlie', '!']
+        tokenize: function (str) {
+            // this function receives the caption string, str
+            // and should return an array of objects like the following:
+            // {
+            //     URL: '', // null if token should not be linked
+            //     text: '' // text of the token
+            // }
         }
     });
 
